@@ -1,16 +1,14 @@
 app:
   PORT: 3333
   MAX_REQUEST_SIZE: '15mb'
-  DATABASE_URL: 'postgresql://postgres:admin@localhost:5432/geekfest'
   JWT_SECRET_TOKEN: 'ctech'
   JWT_ISSUER: 'CTECH'
   JWT_EXPIRES_IN: '7d'
   JWT_REFRESH_TOKEN_EXPIRES_IN: '8h'
   JWT_SECRET_REFRESH_TOKEN: 'refresh_token'
 
-redis:
-  REDIS_USE_CLUSTER: false
-  REDIS_URL: 'redis://localhost:6379'
+postgres:
+  DATABASE_URL: 'postgresql://postgres:admin@localhost:5432/geekfest'
 
 ######################################################################
 ## Configurações YENV ref: https://www.npmjs.com/package/yenv
@@ -19,14 +17,14 @@ redis:
 # Development config uses base config
 development:
   # We can compose more than one at a time.
-  ~compose: [ app, redis ]
+  ~compose: [ app, postgres ]
   # Declare additional settings..
   DEV_MODE: true
 
 # Development config uses base config
 test:
   # We can compose more than one at a time.
-  ~compose: [ app, redis ]
+  ~compose: [ app, postgres ]
   # Declare additional settings..
   DEV_MODE: true
 
