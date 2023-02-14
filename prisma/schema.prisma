@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model events {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(100)
+  notes      String?      @db.VarChar(500)
+  banner_url String?      @db.VarChar(200)
+  type       Int?         @default(0)
+  min        Int?         @default(0)
+  max        Int?         @default(0)
+  team       teams[]
+  user_event user_event[]
+}
+
+model user_event {
+  id         Int       @default(autoincrement())
+  id_user    Int
+  id_event   Int
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  nickname   String
+  event      events    @relation(fields: [id_event], references: [id])
+  user       users     @relation(fields: [id_user], references: [id])
+
+  @@id([id, id_user, id_event])
+}
+
+model users {
+  id            Int          @id @default(autoincrement())
+  name          String       @db.VarChar(100)
+  username      String       @unique @db.VarChar(50)
+  birth_date    DateTime?    @db.Date
+  password_hash String       @db.VarChar(200)
+  password_salt String       @db.VarChar(200)
+  created_at    DateTime?    @default(now()) @db.Timestamp(6)
+  phone         String?      @db.VarChar(15)
+  id_group      Int          @default(3)
+  group         groups       @relation(fields: [id_group], references: [id])
+  team          teams[]
+  user_event    user_event[]
+  user_quest    user_quest[]
+  user_team     user_team[]
+}
+
+model games {
+  id         Int     @id @default(autoincrement())
+  name       String  @db.VarChar(100)
+  device     String  @db.VarChar(50)
+  modality   String  @db.VarChar(50)
+  schedules  String  @db.VarChar(2000)
+  banner_url String? @db.VarChar(200)
+}
+
+model attractions {
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(100)
+  description String  @db.VarChar(400)
+  banner_url  String? @db.VarChar(200)
+}
+
+model quests {
+  id         Int          @id @default(autoincrement())
+  name       String       @db.VarChar(100)
+  objective  String       @db.VarChar(200)
+  amount     Int
+  user_quest user_quest[]
+}
+
+model user_quest {
+  id        Int    @default(autoincrement())
+  id_user   Int
+  id_quest  Int
+  collected Int    @default(1)
+  quests    quests @relation(fields: [id_quest], references: [id])
+  users     users  @relation(fields: [id_user], references: [id])
+
+  @@id([id, id_user, id_quest])
+}
+
+model groups {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(50)
+  group_permission group_permission[]
+  user             users[]
+}
+
+model group_permission {
+  id            Int         @default(autoincrement())
+  id_group      Int
+  id_permission Int
+  group         groups      @relation(fields: [id_group], references: [id])
+  permission    permissions @relation(fields: [id_permission], references: [id])
+
+  @@id([id, id_group, id_permission])
+}
+
+model permissions {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(50)
+  lore             String?            @db.VarChar(200)
+  type             String             @db.VarChar(25)
+  group_permission group_permission[]
+}
+
+model teams {
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(50)
+  id_event  Int
+  id_user   Int
+  event     events      @relation(fields: [id_event], references: [id])
+  user      users       @relation(fields: [id_user], references: [id])
+  user_team user_team[]
+}
+
+model user_team {
+  id       Int     @id(map: "users_teams_pkey") @default(autoincrement())
+  id_user  Int
+  id_team  Int
+  nickname String? @db.VarChar(50)
+  team     teams   @relation(fields: [id_team], references: [id], onDelete: Cascade)
+  user     users   @relation(fields: [id_user], references: [id])
+}
