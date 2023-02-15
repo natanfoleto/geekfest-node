@@ -7,6 +7,7 @@ interface IRequest {
 	name: string;
 	notes: string;
 	bannerUrl: string;
+	rulesUrl: string;
 	type: number;
 	min: number;
 	max: number;
@@ -24,6 +25,7 @@ class UpdateEventUseCase {
 		name,
 		notes,
 		bannerUrl,
+		rulesUrl,
 		type,
 		min,
 		max,
@@ -48,6 +50,7 @@ class UpdateEventUseCase {
 				name,
 				notes,
 				banner_url: bannerUrl,
+				rules_url: rulesUrl,
 				type,
 				min,
 				max,

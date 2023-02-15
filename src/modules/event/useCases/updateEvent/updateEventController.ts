@@ -7,13 +7,14 @@ class UpdateEventController {
 			const updateEventUseCase = new UpdateEventUseCase();
 
 			const { id } = req.params;
-			const { name, notes, bannerUrl, type, min, max } = req.body;
+			const { name, notes, bannerUrl, rulesUrl, type, min, max } = req.body;
 
 			const response = await updateEventUseCase.execute({
 				id: Number(id),
 				name,
 				notes,
 				bannerUrl,
+				rulesUrl,
 				type,
 				min,
 				max,

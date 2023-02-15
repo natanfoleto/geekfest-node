@@ -13,6 +13,7 @@ class EventRepositories implements IEventRepositories {
 				name: true,
 				notes: true,
 				banner_url: true,
+				rules_url: true,
 				type: true,
 			},
 		});
@@ -45,13 +46,14 @@ class EventRepositories implements IEventRepositories {
 		name,
 		notes,
 		banner_url,
+		rules_url,
 		type,
 		min,
 		max,
 	}: UpdateEvent): Promise<Event> {
 		return prisma.events.update({
 			where: { id },
-			data: { name, notes, banner_url, type, min, max },
+			data: { name, notes, banner_url, rules_url, type, min, max },
 		});
 	}
 

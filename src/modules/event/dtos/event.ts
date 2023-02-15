@@ -3,6 +3,7 @@ interface Event {
 	name: string;
 	notes: string;
 	banner_url: string;
+	rules_url: string;
 	type: number;
 	min?: number;
 	max?: number;
@@ -12,6 +13,7 @@ interface CreateEvent {
 	name: string;
 	notes: string;
 	banner_url: string;
+	rules_url: string;
 	type: number;
 	min?: number;
 	max?: number;
@@ -22,6 +24,7 @@ interface UpdateEvent {
 	name: string;
 	notes: string;
 	banner_url: string;
+	rules_url: string;
 	type: number;
 	min: number;
 	max: number;

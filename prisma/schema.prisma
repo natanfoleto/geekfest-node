@@ -12,6 +12,7 @@ model events {
   name       String       @db.VarChar(100)
   notes      String?      @db.VarChar(500)
   banner_url String?      @db.VarChar(200)
+  rules_url  String?      @db.VarChar(200)
   type       Int?         @default(0)
   min        Int?         @default(0)
   max        Int?         @default(0)
