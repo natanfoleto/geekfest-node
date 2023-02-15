@@ -46,8 +46,6 @@ jobs:
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           pm2 kill -a
-          rm -rf node_modules
-          rm -rf dist
           yarn install
           yarn build
           yarn start
