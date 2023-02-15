@@ -41,9 +41,14 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /var/www/geekfest-node
+          fuser -n tcp -k 3333
+          killall node
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           pm2 kill -a
-          yarn
+          rm -rf node_modules
+          rm -rf dist
+          yarn install
           yarn build
           yarn start
+          

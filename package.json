@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "dev": "ts-node-dev -r tsconfig-paths/register --exit-child --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
-    "start": "pm2 start dist/server.js -i max --name=geekfest-node",
+    "start": "pm2 start dist/server.js --name=geekfest-node",
     "build": "tsc --project tsconfig.json && tsconfig-replace-paths -p tsconfig.json -s ./src -o ./dist",
     "migrate": "prisma migrate dev"
   },
