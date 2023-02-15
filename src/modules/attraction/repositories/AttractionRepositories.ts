@@ -1,4 +1,4 @@
-import prisma from 'src/libs/prismaClient';
+import prisma from '@libs/prismaClient';
 
 import {
 	CreateAttraction,
