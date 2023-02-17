@@ -1,6 +1,7 @@
 import { TeamRepositories } from '@modules/team/repositories/TeamRepositories';
 import { EventRepositories } from '@modules/event/repositories/EventRepositories';
 import { UserRepositories } from '@modules/user/repositories/UserRepositories';
+import { UserTeamRepositories } from '@modules/userTeam/repositories/UserTeamRepositories';
 import { AppError } from '@shared/answers/AppError';
 import { AppResponse } from '@shared/answers/AppResponse';
 
@@ -14,15 +15,18 @@ class CreateTeamUseCase {
 	private teamRepositories: TeamRepositories;
 	private eventRepositories: EventRepositories;
 	private userRepositories: UserRepositories;
+	private userTeamRepositories: UserTeamRepositories;
 
 	constructor(
 		teamRepositories = new TeamRepositories(),
 		eventRepositories = new EventRepositories(),
-		userRepositories = new UserRepositories()
+		userRepositories = new UserRepositories(),
+		userTeamRepositories = new UserTeamRepositories()
 	) {
 		this.teamRepositories = teamRepositories;
 		this.eventRepositories = eventRepositories;
 		this.userRepositories = userRepositories;
+		this.userTeamRepositories = userTeamRepositories;
 	}
 
 	async execute({ name, id_event, id_user }: IRequest): Promise<any> {
@@ -51,10 +55,18 @@ class CreateTeamUseCase {
 				});
 			}
 
+			const user = await this.userRepositories.findById(userFound);
+
 			const team = await this.teamRepositories.create({
 				name,
 				id_event,
 				id_user,
+			});
+
+			await this.userTeamRepositories.create({
+				id_team: team.id,
+				id_user: user.id,
+				nickname: user.username,
 			});
 
 			return new AppResponse({
