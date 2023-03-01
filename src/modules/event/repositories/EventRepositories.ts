@@ -58,6 +58,7 @@ class EventRepositories implements IEventRepositories {
 						name: true,
 						user_team: {
 							select: {
+								nickname: true,
 								user: {
 									select: {
 										name: true,
