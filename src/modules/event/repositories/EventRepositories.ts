@@ -15,12 +15,67 @@ class EventRepositories implements IEventRepositories {
 				banner_url: true,
 				rules_url: true,
 				type: true,
+				min: true,
+				max: true,
+				limit: true,
 			},
 		});
 	}
 
 	async findAll(): Promise<Event[]> {
 		return prisma.events.findMany();
+	}
+
+	async findUsersByEvent(): Promise<any> {
+		return prisma.events.findMany({
+			select: {
+				id: true,
+				name: true,
+				banner_url: true,
+				user_event: {
+					select: {
+						nickname: true,
+						user: {
+							select: {
+								name: true,
+								username: true,
+							},
+						},
+					},
+				},
+			},
+		});
+	}
+
+	async findTeamsByEvent(): Promise<any> {
+		return prisma.events.findMany({
+			select: {
+				id: true,
+				name: true,
+				banner_url: true,
+				team: {
+					select: {
+						name: true,
+						user_team: {
+							select: {
+								user: {
+									select: {
+										name: true,
+										username: true,
+									},
+								},
+							},
+						},
+						user: {
+							select: {
+								name: true,
+								username: true,
+							},
+						},
+					},
+				},
+			},
+		});
 	}
 
 	async findById(id: number): Promise<Event> {
@@ -50,10 +105,11 @@ class EventRepositories implements IEventRepositories {
 		type,
 		min,
 		max,
+		limit,
 	}: UpdateEvent): Promise<Event> {
 		return prisma.events.update({
 			where: { id },
-			data: { name, notes, banner_url, rules_url, type, min, max },
+			data: { name, notes, banner_url, rules_url, type, min, max, limit },
 		});
 	}
 

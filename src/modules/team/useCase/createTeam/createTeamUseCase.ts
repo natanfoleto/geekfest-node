@@ -55,7 +55,7 @@ class CreateTeamUseCase {
 				});
 			}
 
-			const user = await this.userRepositories.findById(userFound);
+			const user = await this.userRepositories.findById(id_user);
 
 			const team = await this.teamRepositories.create({
 				name,

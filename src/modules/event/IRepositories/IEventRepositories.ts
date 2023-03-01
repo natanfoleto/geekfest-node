@@ -2,6 +2,8 @@ import { Event, CreateEvent, UpdateEvent } from '@modules/event/dtos/event';
 
 interface IEventRepositories {
 	findAll(): Promise<Event[]>;
+	findUsersByEvent(): Promise<any>;
+	findTeamsByEvent(): Promise<any>;
 	findById(id: number): Promise<Event>;
 	create(data: CreateEvent): Promise<Event>;
 	countById(id: number): Promise<number>;

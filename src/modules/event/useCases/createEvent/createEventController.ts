@@ -7,7 +7,8 @@ class CreateEventController {
 		try {
 			const createEventUseCase = new CreateEventUseCase();
 
-			const { name, notes, bannerUrl, rulesUrl, type, min, max } = req.body;
+			const { name, notes, bannerUrl, rulesUrl, type, min, max, limit } =
+				req.body;
 
 			const response = await createEventUseCase.execute({
 				name,
@@ -17,6 +18,7 @@ class CreateEventController {
 				type,
 				min,
 				max,
+				limit,
 			});
 
 			return res.json(response);

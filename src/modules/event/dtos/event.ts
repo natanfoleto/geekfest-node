@@ -7,6 +7,7 @@ interface Event {
 	type: number;
 	min?: number;
 	max?: number;
+	limit?: number;
 }
 
 interface CreateEvent {
@@ -17,6 +18,7 @@ interface CreateEvent {
 	type: number;
 	min?: number;
 	max?: number;
+	limit?: number;
 }
 
 interface UpdateEvent {
@@ -28,6 +30,7 @@ interface UpdateEvent {
 	type: number;
 	min: number;
 	max: number;
+	limit?: number;
 }
 
 export { Event, CreateEvent, UpdateEvent };

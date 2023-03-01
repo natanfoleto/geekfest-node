@@ -10,6 +10,7 @@ interface IRequest {
 	type: number;
 	min: number;
 	max: number;
+	limit: number;
 }
 
 class CreateEventUseCase {
@@ -27,6 +28,7 @@ class CreateEventUseCase {
 		type,
 		min,
 		max,
+		limit,
 	}: IRequest): Promise<any> {
 		try {
 			if (min > max) {
@@ -50,6 +52,7 @@ class CreateEventUseCase {
 				type,
 				min,
 				max,
+				limit,
 			});
 
 			return new AppResponse({

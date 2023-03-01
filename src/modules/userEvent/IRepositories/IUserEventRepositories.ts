@@ -12,6 +12,7 @@ interface IUserEventRepositories {
 	findByUserUsername(username: string): Promise<Event[]>;
 	findByEventName(name: string): Promise<User[]>;
 	count(data: Associate): Promise<number>;
+	countByEventName(name: string): Promise<number>;
 	create(data: CreateUserEvent): Promise<void>;
 	updateNickname(data: UpdateNickName): Promise<void>;
 	delete(id: number): Promise<void>;

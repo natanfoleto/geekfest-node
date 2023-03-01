@@ -51,6 +51,12 @@ class TeamRepositories implements ITeamRepositories {
 		});
 	}
 
+	async countByEventName(name: string): Promise<number> {
+		return prisma.teams.count({
+			where: { event: { name } },
+		});
+	}
+
 	async create(data: CreateTeam): Promise<Team> {
 		return prisma.teams.create({
 			data,

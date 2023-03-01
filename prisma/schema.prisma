@@ -16,6 +16,7 @@ model events {
   type       Int?         @default(0)
   min        Int?         @default(0)
   max        Int?         @default(0)
+  limit      Int?         @default(0)
   team       teams[]
   user_event user_event[]
 }

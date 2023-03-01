@@ -11,6 +11,7 @@ interface IRequest {
 	type: number;
 	min: number;
 	max: number;
+	limit: number;
 }
 
 class UpdateEventUseCase {
@@ -29,6 +30,7 @@ class UpdateEventUseCase {
 		type,
 		min,
 		max,
+		limit,
 	}: IRequest): Promise<any> {
 		try {
 			if (min > max) {
@@ -54,6 +56,7 @@ class UpdateEventUseCase {
 				type,
 				min,
 				max,
+				limit,
 			});
 
 			return new AppResponse({ message: 'Evento atualizado com sucesso' });

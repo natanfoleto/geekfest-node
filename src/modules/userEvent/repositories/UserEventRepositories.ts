@@ -62,6 +62,12 @@ class UserEventRepositories implements IUserEventRepositories {
 		});
 	}
 
+	async countByEventName(name: string): Promise<number> {
+		return prisma.user_event.count({
+			where: { event: { name } },
+		});
+	}
+
 	async create({
 		id_event,
 		id_user,
