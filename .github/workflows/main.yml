@@ -50,7 +50,7 @@ jobs:
           export MAX_REQUEST_SIZE=15mb
           export JWT_SECRET_TOKEN=ctech
           export JWT_ISSUER=CTECH
-          export JWT_EXPIRES_IN=7d
+          export JWT_EXPIRES_IN=30d
           export JWT_REFRESH_TOKEN_EXPIRES_IN=30d
           export JWT_SECRET_REFRESH_TOKEN=refresh_token
           export DATABASE_URL=postgresql://postgres:admin@localhost:5432/geekfest
