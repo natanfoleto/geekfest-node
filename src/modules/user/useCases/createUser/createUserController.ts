@@ -7,11 +7,13 @@ class CreateUserController {
 		try {
 			const createUserUseCase = new CreateUserUseCase();
 
-			const { username, name, birthDate, password, confirmPassword } = req.body;
+			const { username, name, phone, birthDate, password, confirmPassword } =
+				req.body;
 
 			const response = await createUserUseCase.execute({
 				username,
 				name,
+				phone,
 				birthDate,
 				password,
 				confirmPassword,

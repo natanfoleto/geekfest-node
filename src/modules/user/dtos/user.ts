@@ -13,6 +13,7 @@ interface User {
 interface CreateUser {
 	username: string;
 	name: string;
+	phone: string;
 	birth_date: Date;
 	password_hash: string;
 	password_salt: string;

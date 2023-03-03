@@ -6,6 +6,7 @@ import { encryptPassword } from '@utils/bcrypt';
 interface IRequest {
 	username: string;
 	name: string;
+	phone: string;
 	birthDate: Date;
 	password: string;
 	confirmPassword: string;
@@ -21,6 +22,7 @@ class CreateUserUseCase {
 	async execute({
 		username,
 		name,
+		phone,
 		birthDate,
 		password,
 		confirmPassword,
@@ -45,6 +47,7 @@ class CreateUserUseCase {
 			const user = await this.userRepositories.create({
 				username,
 				name,
+				phone: phone || null,
 				birth_date: new Date(birthDate),
 				password_hash: password_encrypt.hash,
 				password_salt: password_encrypt.salt,
