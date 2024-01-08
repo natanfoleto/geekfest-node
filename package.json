@@ -3,27 +3,21 @@
   "version": "0.0.1",
   "description": "Geek Fest Backend App.",
   "main": "dist/server.js",
+  "license": "MIT",
   "scripts": {
-    "clean": "rimraf dist",
-    "dev": "ts-node-dev -r tsconfig-paths/register --exit-child --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
-    "start": "pm2 start dist/server.js --name=geekfest-node",
-    "build": "tsc --project tsconfig.json && tsconfig-replace-paths -p tsconfig.json -s ./src -o ./dist",
-    "migrate": "prisma migrate dev"
-  },
-  "repository": {
-    "type": "git",
-    "url": ""
+    "dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build"
   },
   "dependencies": {
     "@prisma/client": "^4.4.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.1",
     "helmet": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.10.0",
-    "tsconfig-replace-paths": "^0.0.11",
-    "yenv": "^3.0.1"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -41,6 +35,8 @@
     "prisma": "^4.4.0",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.0.0",
+    "tsup": "^8.0.1",
+    "tsx": "^4.7.0",
     "typescript": "^4.7.4"
   }
 }

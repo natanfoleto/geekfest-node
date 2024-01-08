@@ -1,34 +1,30 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "lib": ["ES6"],
+    "target": "es6",
     "module": "commonjs",
-    "rootDir": "./src",
-    "typeRoots": [
-      "./node_modules/@types", 
-      "./src/@types"
-    ],
+    "lib": ["esnext"],
     "resolveJsonModule": true,
-    "allowJs": true,
-    "outDir": "./dist",
     "removeComments": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "baseUrl": "./",
     "paths": {
-			"@actions/*": ["./src/actions/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@libs/*": ["./src/libs/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@actions/*": ["./src/actions/*"],
 			"@dtos/*": ["./src/entities/dtos/*"],
 			"@config/*": ["./src/config/*"],
 			"@helper/*": ["./src/helper/*"],
-			"@libs/*": ["./src/libs/*"],
-			"@routes/*": ["./src/routes/*"],
-			"@middlewares/*": ["./src/middlewares/*"],
-			"@modules/*": ["./src/modules/*"],
-			"@shared/*": ["./src/shared/*"],
-			"@utils/*": ["./src/utils/*"]
-		},
-  },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist", "test"]
+			"@middlewares/*": ["./src/middlewares/*"]
+    }
+  }
 }
