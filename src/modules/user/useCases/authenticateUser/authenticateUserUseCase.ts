@@ -1,4 +1,3 @@
-import env from '@config/config';
 import { sign } from 'jsonwebtoken';
 import { UserRepositories } from '@modules/user/repositories/UserRepositories';
 import { AppError } from '@shared/answers/AppError';
@@ -54,18 +53,18 @@ class AuthenticateUserUseCase {
 				id_group,
 				permissions,
 				sub: user.id,
-				iss: env.JWT_ISSUER,
+				iss: process.env.JWT_ISSUER,
 			};
 
-			const token = sign({ tokenPayload }, env.JWT_SECRET_TOKEN, {
+			const token = sign({ tokenPayload }, process.env.JWT_SECRET_TOKEN, {
 				subject: user.username,
-				expiresIn: env.JWT_EXPIRES_IN,
+				expiresIn: process.env.JWT_EXPIRES_IN,
 			});
 
 			const refresh_token = sign(
 				{ tokenPayload },
-				env.JWT_SECRET_REFRESH_TOKEN,
-				{ expiresIn: env.JWT_REFRESH_TOKEN_EXPIRES_IN }
+				process.env.JWT_SECRET_REFRESH_TOKEN,
+				{ expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES_IN }
 			);
 
 			return new AppResponse({

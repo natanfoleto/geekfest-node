@@ -1,4 +1,3 @@
-import env from '@config/config';
 import { NextFunction, Request, Response } from 'express';
 import { UserRepositories } from '@modules/user/repositories/UserRepositories';
 import { verify } from 'jsonwebtoken';
@@ -28,7 +27,7 @@ export async function authentication(
 	const [, token] = authHeader.split(' ');
 
 	try {
-		const { tokenPayload } = verify(token, env.JWT_SECRET_TOKEN) as IPayload;
+		const { tokenPayload } = verify(token, process.env.JWT_SECRET_TOKEN) as IPayload;
 
 		const userRepositories = new UserRepositories();
 
